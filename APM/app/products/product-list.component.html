@@ -4,26 +4,23 @@
     </div>
     <div class="panel-body">
         <div class="row">
-            <div class="col-md-2 col-xs-2">
-                Filter by:
-            </div>
+            <div class="col-md-2 col-xs-2">Filter by:</div>
             <div class="col-md-4 col-xs-4">
-                <input type="text"
-                    [(ngModel)] = 'listFilter' />
+                <input type="text" 
+                [(ngModel)]='listFilter' />
             </div>
         </div>
         <div class="row">
             <div class="col-md-6 col-xs-6">
-                <h3>Filtered by: {{listFilter}}</h3>
+                <h3>Filtered by: {{listFilter}} </h3>
             </div>
         </div>
         <div class="table-responsive">
-            <table class="table" *ngIf='products && products.length'>
+            <table class="table" *ngIf='products && products.length > 0'>
                 <thead>
                     <tr>
                         <th>
-                            <button class="btn btn-primary"
-                                (click)='toggleImage()'>
+                            <button class="btn btn-primary" (click)='toggleImage()'>
                                 {{showImage ? 'Hide' : 'Show'}} Image
                             </button>
                         </th>
@@ -37,17 +34,21 @@
                 <tbody>
                     <tr *ngFor='let product of products | productFilter:listFilter'>
                         <td>
-                            <img *ngIf='showImage'
-                            [src]='product.imageUrl'
-                            [title]='product.productName' 
-                            [style.width.px] = 'imageWidth'
-                            [style.margin.px] = 'imageMargin'/>
+                            <img *ngIf='showImage' 
+                                [src]='product.imageUrl'
+                                [title]='product.productName'
+                                [style.width.px]='imageWidth'
+                                [style.margin.px]='imageMargin'>
                         </td>
                         <td>{{product.productName}}</td>
                         <td>{{product.productCode | lowercase}}</td>
                         <td>{{product.releaseDate}}</td>
-                        <td>{{product.price | currency:'USD':true:'1.2-2'}}</td>
-                        <td>{{product.starRating}}</td>
+                        <td>{{product.price | currency:'USD':true:'1.2-2' | lowercase}}</td>
+                        <td>
+                            <ai-star [rating]='product.starRating'
+                                (ratingClicked)='onRatingClicked($event)'>
+                            </ai-star>
+                        </td>
                     </tr>
                 </tbody>
             </table>

@@ -6,21 +6,16 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 var core_1 = require("@angular/core");
-var ProductFilterPipe = (function () {
-    function ProductFilterPipe() {
+var ProductDetailComponent = (function () {
+    function ProductDetailComponent() {
+        this.pageTitle = 'Product Detail';
     }
-    ProductFilterPipe.prototype.transform = function (value, filterBy) {
-        filterBy = filterBy ? filterBy.toLocaleLowerCase() : null;
-        return filterBy ? value.filter(function (product) {
-            return product.productName.toLocaleLowerCase().indexOf(filterBy) !== -1;
-        }) : value;
-    };
-    return ProductFilterPipe;
+    return ProductDetailComponent;
 }());
-ProductFilterPipe = __decorate([
-    core_1.Pipe({
-        name: 'productFilter'
+ProductDetailComponent = __decorate([
+    core_1.Component({
+        templateUrl: 'app/products/product-detail.component.html'
     })
-], ProductFilterPipe);
-exports.ProductFilterPipe = ProductFilterPipe;
-//# sourceMappingURL=product-filter.pipe.js.map
+], ProductDetailComponent);
+exports.ProductDetailComponent = ProductDetailComponent;
+//# sourceMappingURL=product-detail.component.js.map
