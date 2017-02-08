@@ -33,7 +33,7 @@ StarComponent = __decorate([
     core_1.Component({
         selector: 'ai-star',
         templateUrl: 'app/shared/star.component.html',
-        styleUrls: ['app/shared/star.component.css']
+        styleUrls: ['app/shared/star.component.css'],
     })
 ], StarComponent);
 exports.StarComponent = StarComponent;

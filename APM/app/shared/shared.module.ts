@@ -9,9 +9,9 @@ import { StarComponent } from './star.component';
     declarations:[ StarComponent ],
     imports: [CommonModule],
     exports: [
-        CommonModule,
         FormsModule,
-        StarComponent
+        StarComponent,
+        CommonModule
     ]
 })
 

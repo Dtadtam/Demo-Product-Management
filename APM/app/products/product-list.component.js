@@ -36,7 +36,7 @@ ProductListComponent = __decorate([
         moduleId: module.id,
         templateUrl: 'product-list.component.html',
         // styles: ['thead{ color: #337AB7;}'],
-        styleUrls: ['product-list.component.css']
+        styleUrls: ['product-list.component.css'],
     }),
     __metadata("design:paramtypes", [product_service_1.ProductService])
 ], ProductListComponent);

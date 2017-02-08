@@ -6,24 +6,24 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 var core_1 = require("@angular/core");
-var common_1 = require("@angular/common");
-var forms_1 = require("@angular/forms");
-var star_component_1 = require("./star.component");
-var SharedModule = (function () {
-    function SharedModule() {
+var router_1 = require("@angular/router");
+var welcome_component_1 = require("./welcome.component");
+var WelcomeRoutingModule = (function () {
+    function WelcomeRoutingModule() {
     }
-    return SharedModule;
+    return WelcomeRoutingModule;
 }());
-SharedModule = __decorate([
+WelcomeRoutingModule = __decorate([
     core_1.NgModule({
-        declarations: [star_component_1.StarComponent],
-        imports: [common_1.CommonModule],
+        imports: [
+            router_1.RouterModule.forChild([
+                { path: 'welcome', component: welcome_component_1.WelcomeComponent }
+            ])
+        ],
         exports: [
-            forms_1.FormsModule,
-            star_component_1.StarComponent,
-            common_1.CommonModule
+            router_1.RouterModule
         ]
     })
-], SharedModule);
-exports.SharedModule = SharedModule;
-//# sourceMappingURL=shared.module.js.map
+], WelcomeRoutingModule);
+exports.WelcomeRoutingModule = WelcomeRoutingModule;
+//# sourceMappingURL=welcome-routing.module.js.map

@@ -1,0 +1,28 @@
+Angular Modules Concept
+
+Bootstrap Array
+- Every application must bootstrap at least one component, the root application component.
+
+Declarations Array
+- Every component, directive, and pipe we create must belong to one and only one Angular module.
+- Only declare components, directives, and pipes.
+- Never re-declare components, directives, or pipes that belong to another module.
+- All declared components, directives, and pipes are private by default.
+  They are only accessible to other components, directives, and pipes declared in the same module.
+- The Angular module provides the template resolution environment for its component templates.
+
+Exports Array
+- Export any component, directive, or pipe if another component needs it.
+- Re-export modules to re-export thier components, directives, and pipes.
+- We can re-export something without importing it first.
+- Never export a service.
+
+Imports Array
+- Importing a module makes available any exported components, directives, and pipes from that module.
+- Only import what this module needs.
+- Importing a module does NOT provide access to its imported modules.
+
+Providers Array
+- Any service provider added to the providers array is registered at the root of the application.
+- Don't add service to the providers array of a shared module.
+- Routing guards must be added to the providers array of an Angular module.

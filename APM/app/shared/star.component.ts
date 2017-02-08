@@ -4,7 +4,7 @@ import { Component, OnChanges, Input,
 @Component({
     selector: 'ai-star',
     templateUrl:'app/shared/star.component.html',
-    styleUrls:['app/shared/star.component.css']
+    styleUrls:['app/shared/star.component.css'],
 })
 
 export class StarComponent implements OnChanges {
