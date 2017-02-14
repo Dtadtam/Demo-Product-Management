@@ -20,11 +20,12 @@ ProductRoutingModule = __decorate([
         imports: [
             router_1.RouterModule.forChild([
                 { path: 'products', component: product_list_component_1.ProductListComponent },
-                { path: 'ProductDetail', canActivate: [product_guard_services_1.ProductDetailGuard],
+                { path: 'ProductDetail/:id', canActivate: [product_guard_services_1.ProductDetailGuard],
                     component: product_detail_component_1.ProductDetailComponent }
             ])
         ],
-        exports: [router_1.RouterModule]
+        exports: [router_1.RouterModule],
+        providers: [product_guard_services_1.ProductDetailGuard]
     })
 ], ProductRoutingModule);
 exports.ProductRoutingModule = ProductRoutingModule;

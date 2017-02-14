@@ -25,6 +25,12 @@ var ProductService = (function () {
             .do(function (data) { return console.log('All: ' + JSON.stringify(data)); })
             .catch(this.handleError);
     };
+    ProductService.prototype.getProductById = function (id) {
+        return this._http.get(this._productUrl)
+            .map(function (response) { return response.json().find(function (p) { return p.productId == id; }); })
+            .do(function (data) { return console.log(data); })
+            .catch(this.handleError);
+    };
     ProductService.prototype.handleError = function (error) {
         console.error(error);
         return Observable_1.Observable.throw(error.json().error || 'Server error');

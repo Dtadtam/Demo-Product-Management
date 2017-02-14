@@ -9,11 +9,12 @@ import { ProductDetailGuard } from './product-guard.services';
     imports:[
         RouterModule.forChild([
             { path: 'products', component: ProductListComponent },
-            { path: 'ProductDetail', canActivate: [ ProductDetailGuard ], 
+            { path: 'ProductDetail/:id', canActivate: [ ProductDetailGuard ], 
                 component: ProductDetailComponent }
         ])
     ],
-    exports:[ RouterModule ]
+    exports:[ RouterModule ],
+    providers: [ ProductDetailGuard ]
 })
 
 export class ProductRoutingModule {

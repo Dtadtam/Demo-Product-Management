@@ -1,6 +1,6 @@
-<div class="panel panel-primary">
+<div class="panel panel-primary" *ngIf='product'>
     <div class="panel-heading">
-        {{pageTitle}}
+        {{pageTitle}} : {{product.productName}}
     </div>
 
     <div class="panel-footer">
