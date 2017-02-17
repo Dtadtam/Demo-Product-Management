@@ -18,15 +18,16 @@ export class ProductService {
     getProducts(): Observable<IProduct[]> {
         return this._http.get(this._productUrl)
             .map((response: Response) => <IProduct[]> response.json())
-            .do(data => console.log('All: ' + JSON.stringify(data)))
+            // .do(data => console.log('All: ' + JSON.stringify(data)))
             .catch(this.handleError);
     }
 
     getProductById(id: number): Observable<IProduct> {
-        return this._http.get(this._productUrl)
+        let result = this._http.get(this._productUrl)
             .map((response: Response) => (<IProduct[]> response.json()).find(p => p.productId == id))
-            .do(data => console.log(data))
-            .catch(this.handleError);
+            // .do(data => console.log(data))
+            .catch(this.handleError); 
+        return result;
     }
 
     private handleError(error: Response){

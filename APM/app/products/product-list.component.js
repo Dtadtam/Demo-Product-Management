@@ -17,6 +17,7 @@ var ProductListComponent = (function () {
         this.imageWidth = 50;
         this.imageMargin = 2;
         this.showImage = false;
+        this.listRating = [1, 2, 3, 4, 5];
     }
     ProductListComponent.prototype.toggleImage = function () {
         this.showImage = !this.showImage;
@@ -27,7 +28,7 @@ var ProductListComponent = (function () {
             .subscribe(function (products) { return _this.products = products; }, function (error) { return _this.errorMessage = error; });
     };
     ProductListComponent.prototype.onRatingClicked = function (message) {
-        this.pageTitle = 'Product List: ' + message;
+        this.pageTitle = "Product List: The rating " + message + " was clicked!";
     };
     return ProductListComponent;
 }());

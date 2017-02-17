@@ -22,14 +22,13 @@ var ProductService = (function () {
     ProductService.prototype.getProducts = function () {
         return this._http.get(this._productUrl)
             .map(function (response) { return response.json(); })
-            .do(function (data) { return console.log('All: ' + JSON.stringify(data)); })
             .catch(this.handleError);
     };
     ProductService.prototype.getProductById = function (id) {
-        return this._http.get(this._productUrl)
+        var result = this._http.get(this._productUrl)
             .map(function (response) { return response.json().find(function (p) { return p.productId == id; }); })
-            .do(function (data) { return console.log(data); })
             .catch(this.handleError);
+        return result;
     };
     ProductService.prototype.handleError = function (error) {
         console.error(error);

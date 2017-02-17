@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnChanges, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { Subscription } from 'rxjs/Subscription';
@@ -7,10 +7,11 @@ import { IProduct } from './product';
 import { ProductService } from './product.service';
 
 @Component({
-    templateUrl: 'app/products/product-detail.component.html'
+    templateUrl: 'app/products/product-detail.component.html',
+    styleUrls: ['app/products/product-detail.component.css']
 })
 export class ProductDetailComponent implements OnInit, OnDestroy {
-    pageTitle: string = 'Product Detail';
+    pageTitle: string;
     product: IProduct;
     errorMessage: string;
     private sub: Subscription;
@@ -25,9 +26,15 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
         let id = +this._route.snapshot.params['id'];
         this.sub = this._route.params.subscribe(
             params => {
-                this._productService.getProductById(id).subscribe(
-                    result => (this.product = result),
+                this._productService.getProductById(id)
+                .subscribe(
+                    value => {
+                        this.product = value;
+                        this.pageTitle = 'Product Detail : ' + this.product.productName;
+                        // this.product.productName = 'test';
+                    },
                     error => this.errorMessage = <any>error
+                    // () => {this.errorMessage = "<any>error"}
                 );
             }
         );
@@ -35,6 +42,10 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
 
     ngOnDestroy() {
         this.sub.unsubscribe();
+    }
+
+    onRatingClicked(message: string) {
+        this.pageTitle = 'Product Detail : ' + this.product.productName + ' (Rating '+ message +')';
     }
 
     onBack(): void {

@@ -16,17 +16,24 @@ var ProductDetailComponent = (function () {
         this._route = _route;
         this._router = _router;
         this._productService = _productService;
-        this.pageTitle = 'Product Detail';
     }
     ProductDetailComponent.prototype.ngOnInit = function () {
         var _this = this;
         var id = +this._route.snapshot.params['id'];
         this.sub = this._route.params.subscribe(function (params) {
-            _this._productService.getProductById(id).subscribe(function (result) { return (_this.product = result); }, function (error) { return _this.errorMessage = error; });
+            _this._productService.getProductById(id)
+                .subscribe(function (value) {
+                _this.product = value;
+                _this.pageTitle = 'Product Detail : ' + _this.product.productName;
+                // this.product.productName = 'test';
+            }, function (error) { return _this.errorMessage = error; });
         });
     };
     ProductDetailComponent.prototype.ngOnDestroy = function () {
         this.sub.unsubscribe();
+    };
+    ProductDetailComponent.prototype.onRatingClicked = function (message) {
+        this.pageTitle = 'Product Detail : ' + this.product.productName + ' (Rating ' + message + ')';
     };
     ProductDetailComponent.prototype.onBack = function () {
         this._router.navigate(['/products']);
@@ -35,7 +42,8 @@ var ProductDetailComponent = (function () {
 }());
 ProductDetailComponent = __decorate([
     core_1.Component({
-        templateUrl: 'app/products/product-detail.component.html'
+        templateUrl: 'app/products/product-detail.component.html',
+        styleUrls: ['app/products/product-detail.component.css']
     }),
     __metadata("design:paramtypes", [router_1.ActivatedRoute,
         router_1.Router,

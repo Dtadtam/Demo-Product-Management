@@ -6,13 +6,26 @@
         <div class="row">
             <div class="col-md-2 col-xs-2">Filter by:</div>
             <div class="col-md-4 col-xs-4">
-                <input type="text" 
-                [(ngModel)]='listFilter' />
+                <input type="text" [(ngModel)]='listFilter' />
+            </div>
+            <div class="col-md-2 col-xs-2"> Rating:</div>
+            <div class="col-md-4 col-xs-4">
+                <div class="dropdown">
+                    <button class="btn btn-default dropdown-toggle" type="button" id="">Pick One..</button>
+                    <ul class="dropdown-menu" id="ratingDropdown">
+                        <li *ngFor='let ratingNumber of listRating' >
+                            <a href="#" tabindex="-1"> {{ratingNumber}} </a>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </div>
         <div class="row">
             <div class="col-md-6 col-xs-6">
                 <h3>Filtered by: {{listFilter}} </h3>
+            </div>
+            <div class="col-md-6 col-xs-6">
+                <h3>Rating: {{rating}}</h3>
             </div>
         </div>
         <div class="table-responsive">

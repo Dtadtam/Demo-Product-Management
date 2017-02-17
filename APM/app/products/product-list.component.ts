@@ -14,8 +14,10 @@ export class ProductListComponent implements OnInit {
     pageTitle: string = 'Product List';
     imageWidth: number = 50;
     imageMargin: number = 2;
-    showImage = false;
+    showImage:Boolean = false;
+    listRating: number[] = [1, 2, 3, 4, 5];
     listFilter: string;
+    rating: number;
     errorMessage: string;
 
     products: IProduct[];
@@ -35,6 +37,6 @@ export class ProductListComponent implements OnInit {
     }
 
     onRatingClicked(message: string) : void {
-        this.pageTitle = 'Product List: ' + message;
+        this.pageTitle = `Product List: The rating ` + message + ` was clicked!`;
     }
 }

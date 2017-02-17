@@ -1,8 +1,22 @@
 <div class="panel panel-primary" *ngIf='product'>
     <div class="panel-heading">
-        {{pageTitle}} : {{product.productName}}
+        {{pageTitle}}
     </div>
-
+    <div class="panel-body">
+        <div>Name: {{product.productName}}</div>
+        <div>Code: {{product.productCode}}</div>
+        <div>Description: {{product.description}}</div>
+        <div>Availability: {{product.releaseDate}}</div>
+        <div>Price: {{product.price | currency:'USD':true:'1.2-2'}}</div>
+        <div class="fl-left">5 Star Rating:</div>
+        <div class="fl-left" [style.margin-left.px]='5'>
+            <ai-star [rating]='product.starRating' (ratingClicked)='onRatingClicked($event)' ></ai-star>
+        </div>
+        <div class="clear"></div>
+        <div class="col-md-12 col-xs-12 text-center">
+            <img [src]='product.imageUrl' [title]='product.productName' />
+        </div>
+    </div>
     <div class="panel-footer">
         <a class="btn btn-default" (click)='onBack()' style="width: 80px">
             <i class="glyphicon glyphicon-chevron-left"></i> Back

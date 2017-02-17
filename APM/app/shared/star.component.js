@@ -17,7 +17,7 @@ var StarComponent = (function () {
         this.starWidth = this.rating * 86 / 5;
     };
     StarComponent.prototype.onClick = function () {
-        this.ratingClicked.emit("The rating " + this.rating + " was clicked!");
+        this.ratingClicked.emit("" + this.rating);
     };
     return StarComponent;
 }());
