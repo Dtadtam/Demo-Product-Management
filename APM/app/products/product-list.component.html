@@ -10,14 +10,33 @@
             </div>
             <div class="col-md-2 col-xs-2"> Rating:</div>
             <div class="col-md-4 col-xs-4">
-                <div class="dropdown">
+                <!--<div class="dropdown">
                     <button class="btn btn-default dropdown-toggle" type="button" id="">Pick One..</button>
                     <ul class="dropdown-menu" id="ratingDropdown">
                         <li *ngFor='let ratingNumber of listRating' >
                             <a href="#" tabindex="-1"> {{ratingNumber}} </a>
                         </li>
                     </ul>
+                </div>-->
+                <div>
+                    <div class="btn-group" dropdown>
+                        <button id="single-button" type="button" class="btn btn-default" style="width: 100px;" dropdownToggle>
+                                <div style="float: left;">{{ratingFilter}}</div>
+                                <div style="float: right;"><span class="caret"></span></div>
+                                <div style="clear: both;"></div>
+                        </button>
+                        <ul dropdownMenu role="menu" aria-labelledby="single-button">
+                            <li role="menuitem" *ngFor='let ratingNumber of listRating'>
+                                <a class="dropdown-item" href="#" (click)="onRatingFilterChange($event, ratingNumber)">{{ratingNumber}}</a>
+                            </li>
+                            <!--<li role="menuitem"><a class="dropdown-item" href="#" (click)="onRatingFilterChange($event)">Another action</a></li>
+                            <li role="menuitem"><a class="dropdown-item" href="#" (click)="onRatingFilterChange($event)">Something else here</a></li>
+                            <li class="divider dropdown-divider"></li>
+                            <li role="menuitem"><a class="dropdown-item" href="#" (click)="onRatingFilterChange($event)">Separated link</a></li>-->
+                        </ul>
+                    </div>
                 </div>
+                
             </div>
         </div>
         <div class="row">
@@ -25,7 +44,7 @@
                 <h3>Filtered by: {{listFilter}} </h3>
             </div>
             <div class="col-md-6 col-xs-6">
-                <h3>Rating: {{rating}}</h3>
+                <h3>Rating: {{ratingFilter}}</h3>
             </div>
         </div>
         <div class="table-responsive">
@@ -45,7 +64,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor='let product of products | productFilter:listFilter'>
+                    <tr *ngFor='let product of products | productFilter:listFilter:ratingFilter | productSorter'>
                         <td>
                             <img *ngIf='showImage' 
                                 [src]='product.imageUrl'

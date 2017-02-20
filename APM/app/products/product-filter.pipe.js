@@ -9,9 +9,15 @@ var core_1 = require("@angular/core");
 var ProductFilterPipe = (function () {
     function ProductFilterPipe() {
     }
-    ProductFilterPipe.prototype.transform = function (value, filterBy) {
+    ProductFilterPipe.prototype.transform = function (value, filterBy, rating) {
         filterBy = filterBy ? filterBy.toLocaleLowerCase() : null;
-        return filterBy ? value.filter(function (product) { return product.productName.toLocaleLowerCase().indexOf(filterBy) !== -1; }) : value;
+        value = filterBy ? value.filter(function (product) { return product.productName.toLocaleLowerCase().indexOf(filterBy) !== -1; }) : value;
+        if (rating) {
+            var minimum_1 = rating;
+            var maximum_1 = rating + 0.9;
+            value = value.filter(function (product) { return product.starRating >= minimum_1 && product.starRating <= maximum_1; });
+        }
+        return value;
     };
     return ProductFilterPipe;
 }());

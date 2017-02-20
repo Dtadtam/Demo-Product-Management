@@ -17,7 +17,9 @@ export class ProductListComponent implements OnInit {
     showImage:Boolean = false;
     listRating: number[] = [1, 2, 3, 4, 5];
     listFilter: string;
-    rating: number;
+    ratingFilter: number;
+    sortor: string;
+    operator: string;
     errorMessage: string;
 
     products: IProduct[];
@@ -38,5 +40,10 @@ export class ProductListComponent implements OnInit {
 
     onRatingClicked(message: string) : void {
         this.pageTitle = `Product List: The rating ` + message + ` was clicked!`;
+    }
+
+    onRatingFilterChange(event: MouseEvent, ratingNumber:number):void {
+        this.ratingFilter = ratingNumber;
+        event.preventDefault();
     }
 }

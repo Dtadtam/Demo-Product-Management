@@ -30,6 +30,10 @@ var ProductListComponent = (function () {
     ProductListComponent.prototype.onRatingClicked = function (message) {
         this.pageTitle = "Product List: The rating " + message + " was clicked!";
     };
+    ProductListComponent.prototype.onRatingFilterChange = function (event, ratingNumber) {
+        this.ratingFilter = ratingNumber;
+        event.preventDefault();
+    };
     return ProductListComponent;
 }());
 ProductListComponent = __decorate([

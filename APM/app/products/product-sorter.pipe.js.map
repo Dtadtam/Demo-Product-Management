@@ -1,0 +1,1 @@
+{"version":3,"file":"product-sorter.pipe.js","sourceRoot":"","sources":["product-sorter.pipe.ts"],"names":[],"mappings":";;;;;;;AAAA,sCAAoD;AAOpD,IAAa,iBAAiB;IAA9B;IAOA,CAAC;IALG,qCAAS,GAAT,UAAU,KAAiB,EAAE,KAAa,EAAE,QAAgB;QAExD,MAAM,CAAC,KAAK,CAAC;IACjB,CAAC;IAEL,wBAAC;AAAD,CAAC,AAPD,IAOC;AAPY,iBAAiB;IAJ7B,WAAI,CAAC;QACF,IAAI,EAAE,eAAe;KACxB,CAAC;GAEW,iBAAiB,CAO7B;AAPY,8CAAiB"}
