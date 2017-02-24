@@ -19,6 +19,36 @@ var ProductListComponent = (function () {
         this.showImage = false;
         this.listRating = [1, 2, 3, 4, 5];
     }
+    Object.defineProperty(ProductListComponent.prototype, "codeGlyphicon", {
+        get: function () {
+            var glyphicon = 'glyphicon-triangle-bottom';
+            if (this.sortor === 'code' && this.operator === 'DESC')
+                glyphicon = 'glyphicon-triangle-top';
+            return glyphicon;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(ProductListComponent.prototype, "avaliableGlyphicon", {
+        get: function () {
+            var glyphicon = 'glyphicon-triangle-bottom';
+            if (this.sortor === 'avaliable' && this.operator === 'DESC')
+                glyphicon = 'glyphicon-triangle-top';
+            return glyphicon;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(ProductListComponent.prototype, "priceGlyphicon", {
+        get: function () {
+            var glyphicon = 'glyphicon-triangle-bottom';
+            if (this.sortor === 'price' && this.operator === 'DESC')
+                glyphicon = 'glyphicon-triangle-top';
+            return glyphicon;
+        },
+        enumerable: true,
+        configurable: true
+    });
     ProductListComponent.prototype.toggleImage = function () {
         this.showImage = !this.showImage;
     };
@@ -30,9 +60,25 @@ var ProductListComponent = (function () {
     ProductListComponent.prototype.onRatingClicked = function (message) {
         this.pageTitle = "Product List: The rating " + message + " was clicked!";
     };
-    ProductListComponent.prototype.onRatingFilterChange = function (event, ratingNumber) {
+    ProductListComponent.prototype.onRatingFilterChange = function (ratingNumber) {
         this.ratingFilter = ratingNumber;
-        event.preventDefault();
+    };
+    ProductListComponent.prototype.onProductSorterChange = function (sorter) {
+        if (this.sortor === sorter)
+            this.operator = this.manageOperator(this.operator);
+        else {
+            this.sortor = sorter;
+            this.operator = 'ASC';
+        }
+    };
+    ProductListComponent.prototype.manageGlyphicon = function (sorter) {
+        var glyphicon = 'glyphicon-triangle-bottom';
+        if (this.sortor === sorter && this.operator === 'DESC')
+            glyphicon = 'glyphicon-triangle-top';
+        return glyphicon;
+    };
+    ProductListComponent.prototype.manageOperator = function (operator) {
+        return operator === "ASC" ? "DESC" : "ASC";
     };
     return ProductListComponent;
 }());

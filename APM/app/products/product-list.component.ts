@@ -18,21 +18,47 @@ export class ProductListComponent implements OnInit {
     listRating: number[] = [1, 2, 3, 4, 5];
     listFilter: string;
     ratingFilter: number;
-    sortor: string;
-    operator: string;
+    
     errorMessage: string;
 
     products: IProduct[];
 
-    constructor (private _productService: ProductService){
+    sortor: string;
+    operator: string;
 
+    get codeGlyphicon():string {
+        let glyphicon: string = 'glyphicon-triangle-bottom';
+        if(this.sortor === 'code' && this.operator === 'DESC')
+            glyphicon = 'glyphicon-triangle-top';
+
+        return glyphicon;
     }
 
-    toggleImage():void{
+    get avaliableGlyphicon():string {
+        let glyphicon: string = 'glyphicon-triangle-bottom';
+        if(this.sortor === 'avaliable' && this.operator === 'DESC')
+            glyphicon = 'glyphicon-triangle-top';
+
+        return glyphicon;
+    }
+
+    get priceGlyphicon():string {
+        let glyphicon: string = 'glyphicon-triangle-bottom';
+        if(this.sortor === 'price' && this.operator === 'DESC')
+            glyphicon = 'glyphicon-triangle-top';
+        
+        return glyphicon;
+    }
+
+    constructor (private _productService: ProductService) {
+        
+    }
+
+    toggleImage():void {
         this.showImage = !this.showImage;
     }
 
-    ngOnInit():void{
+    ngOnInit():void {
         this._productService.getProducts()
             .subscribe(products => this.products = products,
                 error => this.errorMessage = <any>error); 
@@ -42,8 +68,29 @@ export class ProductListComponent implements OnInit {
         this.pageTitle = `Product List: The rating ` + message + ` was clicked!`;
     }
 
-    onRatingFilterChange(event: MouseEvent, ratingNumber:number):void {
+    onRatingFilterChange(ratingNumber:number):void {
         this.ratingFilter = ratingNumber;
-        event.preventDefault();
+    }
+
+    onProductSorterChange(sorter:string) {
+        if(this.sortor === sorter)
+            this.operator = this.manageOperator(this.operator);
+        else{
+            this.sortor = sorter;
+            this.operator = 'ASC';
+        }
+    }
+
+    manageGlyphicon(sorter: string): string {
+        let glyphicon: string = 'glyphicon-triangle-bottom';
+        if(this.sortor === sorter && this.operator === 'DESC')
+            glyphicon = 'glyphicon-triangle-top';
+
+        return glyphicon;
+    }
+
+    private manageOperator(operator: string): string
+    {
+        return operator === "ASC" ? "DESC" : "ASC";
     }
 }

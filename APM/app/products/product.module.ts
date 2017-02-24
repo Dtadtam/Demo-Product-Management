@@ -1,8 +1,6 @@
 
 import { NgModule } from '@angular/core';
 
-import { DropdownModule } from 'ng2-bootstrap';
-
 import { ProductListComponent } from './product-list.component';
 import { ProductDetailComponent } from './product-detail.component';
 import { ProductFilterPipe } from './product-filter.pipe';
@@ -15,8 +13,7 @@ import { SharedModule } from '../shared/shared.module';
 @NgModule({
     imports: [
         SharedModule,
-        ProductRoutingModule,
-        DropdownModule.forRoot()
+        ProductRoutingModule
     ],
     declarations: [
         ProductListComponent,
