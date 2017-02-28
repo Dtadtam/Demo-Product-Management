@@ -89,6 +89,12 @@ export class ProductListComponent implements OnInit {
         return glyphicon;
     }
 
+    convertReleaseDate(date: string): string {
+        let objDate:Date = new Date(date); 
+        let monthNames:string[] = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+        return objDate.getDate() + ' ' + monthNames[objDate.getMonth()] + ' ' + objDate.getFullYear();
+    }
+
     private manageOperator(operator: string): string
     {
         return operator === "ASC" ? "DESC" : "ASC";

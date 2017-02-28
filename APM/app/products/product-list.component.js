@@ -77,6 +77,11 @@ var ProductListComponent = (function () {
             glyphicon = 'glyphicon-triangle-top';
         return glyphicon;
     };
+    ProductListComponent.prototype.convertReleaseDate = function (date) {
+        var objDate = new Date(date);
+        var monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+        return objDate.getDate() + ' ' + monthNames[objDate.getMonth()] + ' ' + objDate.getFullYear();
+    };
     ProductListComponent.prototype.manageOperator = function (operator) {
         return operator === "ASC" ? "DESC" : "ASC";
     };
