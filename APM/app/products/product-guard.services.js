@@ -32,4 +32,20 @@ ProductDetailGuard = __decorate([
     __metadata("design:paramtypes", [router_1.Router])
 ], ProductDetailGuard);
 exports.ProductDetailGuard = ProductDetailGuard;
+var ProductEditGuard = (function () {
+    function ProductEditGuard(router) {
+        this.router = router;
+    }
+    ProductEditGuard.prototype.canActivate = function (route) {
+        var id = Number(route.url[1].path);
+        if (isNaN(id) || id < 0) {
+            alert('Invalid product id');
+            this.router.navigate(['/products']);
+            return false;
+        }
+        return true;
+    };
+    return ProductEditGuard;
+}());
+exports.ProductEditGuard = ProductEditGuard;
 //# sourceMappingURL=product-guard.services.js.map

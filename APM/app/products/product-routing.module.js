@@ -9,6 +9,7 @@ var core_1 = require("@angular/core");
 var router_1 = require("@angular/router");
 var product_list_component_1 = require("./product-list.component");
 var product_detail_component_1 = require("./product-detail.component");
+var product_edit_component_1 = require("./product-edit.component");
 var product_guard_services_1 = require("./product-guard.services");
 var ProductRoutingModule = (function () {
     function ProductRoutingModule() {
@@ -21,7 +22,10 @@ ProductRoutingModule = __decorate([
             router_1.RouterModule.forChild([
                 { path: 'products', component: product_list_component_1.ProductListComponent },
                 { path: 'ProductDetail/:id', canActivate: [product_guard_services_1.ProductDetailGuard],
-                    component: product_detail_component_1.ProductDetailComponent }
+                    component: product_detail_component_1.ProductDetailComponent },
+                { path: 'productEdit/:id', canDeactivate: [product_guard_services_1.ProductEditGuard],
+                    component: product_edit_component_1.ProductEditComponent
+                }
             ])
         ],
         exports: [router_1.RouterModule],

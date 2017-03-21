@@ -20,3 +20,19 @@ export class ProductDetailGuard implements CanActivate {
         return true;
     }
 }
+
+export class ProductEditGuard implements CanActivate {
+    constructor(private router: Router) {
+
+    }
+
+    canActivate(route: ActivatedRouteSnapshot) : boolean {
+        let id = Number(route.url[1].path);
+        if(isNaN(id) || id < 0) {
+            alert('Invalid product id');
+            this.router.navigate(['/products']);
+            return false;
+        }
+        return true;
+    }
+}
