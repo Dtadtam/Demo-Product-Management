@@ -45,7 +45,18 @@ var ProductEditGuard = (function () {
         }
         return true;
     };
+    ProductEditGuard.prototype.canDeactivate = function (component) {
+        if (component.productForm.dirty) {
+            var productName = component.productForm.get('productName').value || 'New Product';
+            return confirm("Navigate away and lose all changes to " + productName + "?");
+        }
+        return true;
+    };
     return ProductEditGuard;
 }());
+ProductEditGuard = __decorate([
+    core_1.Injectable(),
+    __metadata("design:paramtypes", [router_1.Router])
+], ProductEditGuard);
 exports.ProductEditGuard = ProductEditGuard;
 //# sourceMappingURL=product-guard.services.js.map

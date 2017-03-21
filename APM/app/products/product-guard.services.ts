@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, CanActivate, Router } from '@angular/router';
+import { ActivatedRouteSnapshot, CanActivate, CanDeactivate, Router } from '@angular/router';
+
+import { ProductEditComponent } from './product-edit.component';
 
 @Injectable()
 export class ProductDetailGuard implements CanActivate {
@@ -21,7 +23,8 @@ export class ProductDetailGuard implements CanActivate {
     }
 }
 
-export class ProductEditGuard implements CanActivate {
+@Injectable()
+export class ProductEditGuard implements CanActivate, CanDeactivate<ProductEditComponent> {
     constructor(private router: Router) {
 
     }
@@ -32,6 +35,14 @@ export class ProductEditGuard implements CanActivate {
             alert('Invalid product id');
             this.router.navigate(['/products']);
             return false;
+        }
+        return true;
+    }
+
+    canDeactivate(component: ProductEditComponent): boolean {
+        if(component.productForm.dirty) {
+            let productName = component.productForm.get('productName').value || 'New Product';
+            return confirm(`Navigate away and lose all changes to ${productName}?`);
         }
         return true;
     }

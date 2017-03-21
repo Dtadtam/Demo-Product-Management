@@ -66,6 +66,7 @@
                         <th><a (click)='onProductSorterChange("available")' class="{{sortor === 'available' ? 'sortor' : ''}}">Available <span class="glyphicon {{manageGlyphicon('available')}}" ></span></a></th>
                         <th><a (click)='onProductSorterChange("price")' class="{{sortor === 'price' ? 'sortor' : ''}}">Price <span class="glyphicon {{manageGlyphicon('price')}}" ></span></a></th>
                         <th><a (click)='onProductSorterChange("rating")' class="{{sortor === 'rating' ? 'sortor' : ''}}">5 Star Rating <span class="glyphicon {{manageGlyphicon('rating')}}" ></span></a></th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -89,6 +90,11 @@
                             <ai-star [rating]='product.starRating'
                                 (ratingClicked)='onRatingClicked($event)'>
                             </ai-star>
+                        </td>
+                        <td><a class="btn btn-primary"
+                                [routerLink]="['/productEdit', product.productId]">
+                                Edit
+                            </a>
                         </td>
                     </tr>
                 </tbody>

@@ -23,13 +23,13 @@ ProductRoutingModule = __decorate([
                 { path: 'products', component: product_list_component_1.ProductListComponent },
                 { path: 'ProductDetail/:id', canActivate: [product_guard_services_1.ProductDetailGuard],
                     component: product_detail_component_1.ProductDetailComponent },
-                { path: 'productEdit/:id', canDeactivate: [product_guard_services_1.ProductEditGuard],
-                    component: product_edit_component_1.ProductEditComponent
+                { path: 'productEdit/:id', canActivate: [product_guard_services_1.ProductEditGuard],
+                    canDeactivate: [product_guard_services_1.ProductEditGuard], component: product_edit_component_1.ProductEditComponent
                 }
             ])
         ],
         exports: [router_1.RouterModule],
-        providers: [product_guard_services_1.ProductDetailGuard]
+        providers: [product_guard_services_1.ProductDetailGuard, product_guard_services_1.ProductEditGuard]
     })
 ], ProductRoutingModule);
 exports.ProductRoutingModule = ProductRoutingModule;

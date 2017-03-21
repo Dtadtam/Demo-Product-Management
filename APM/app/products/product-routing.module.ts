@@ -12,13 +12,13 @@ import { ProductDetailGuard, ProductEditGuard } from './product-guard.services';
             { path: 'products', component: ProductListComponent },
             { path: 'ProductDetail/:id', canActivate: [ ProductDetailGuard ], 
                 component: ProductDetailComponent },
-            { path: 'productEdit/:id', canDeactivate: [ ProductEditGuard ],
-                component: ProductEditComponent
+            { path: 'productEdit/:id', canActivate: [ ProductEditGuard ],
+                canDeactivate: [ ProductEditGuard ], component: ProductEditComponent
             }
         ])
     ],
     exports:[ RouterModule ],
-    providers: [ ProductDetailGuard ]
+    providers: [ ProductDetailGuard, ProductEditGuard ]
 })
 
 export class ProductRoutingModule {
