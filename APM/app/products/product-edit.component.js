@@ -8,17 +8,20 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var forms_1 = require("@angular/forms");
 var router_1 = require("@angular/router");
 require("rxjs/add/operator/debounceTime");
 require("rxjs/add/observable/fromEvent");
 require("rxjs/add/observable/merge");
+var product_service_1 = require("./product.service");
 var number_validator_1 = require("../shared/number.validator");
 var ProductEditComponent = (function () {
-    function ProductEditComponent(fb, route) {
+    function ProductEditComponent(fb, route, ProductService) {
         this.fb = fb;
         this.route = route;
+        this.ProductService = ProductService;
         this.pageTitle = 'Product Edit';
         // Use with the generic validation message class
         this.displayMessage = {};
@@ -50,7 +53,7 @@ var ProductEditComponent = (function () {
         // read the product Id from the route parameter
         this.sub = this.route.params.subscribe(function (params) {
             var id = +params['id'];
-            _this.getProductId(id);
+            _this.getProduct(id);
         });
         var productNameControl = this.productForm.get('productName');
         productNameControl.valueChanges.subscribe(function (value) { return _this.setProductNameMessage(productNameControl); });
@@ -64,8 +67,10 @@ var ProductEditComponent = (function () {
     };
     ProductEditComponent.prototype.ngAfterViewInit = function () {
     };
-    ProductEditComponent.prototype.getProductId = function (id) {
-        return null;
+    ProductEditComponent.prototype.getProduct = function (id) {
+        var _this = this;
+        this.ProductService.getProductById(id)
+            .subscribe(function (product) { return _this.onProductRetrieved(product); }, function (error) { return _this.errorMessage = error; });
     };
     ProductEditComponent.prototype.addTag = function () {
         this.tags.push(this.buildTag());
@@ -95,6 +100,26 @@ var ProductEditComponent = (function () {
         else
             return '';
     };
+    ProductEditComponent.prototype.onProductRetrieved = function (product) {
+        if (this.productForm) {
+            this.productForm.reset();
+        }
+        this.product = product;
+        if (this.product.productId === 0) {
+            this.pageTitle = 'Add Product';
+        }
+        else {
+            this.pageTitle = "Edit Product: " + this.product.productName;
+        }
+        // Update the data on the form
+        this.productForm.patchValue({
+            productName: this.product.productName,
+            productCode: this.product.productCode,
+            starRating: this.product.starRating,
+            description: this.product.description
+        });
+        this.productForm.setControl('tags', this.fb.array(this.product.tags || []));
+    };
     return ProductEditComponent;
 }());
 __decorate([
@@ -105,7 +130,7 @@ ProductEditComponent = __decorate([
     core_1.Component({
         templateUrl: './app/products/product-edit.component.html'
     }),
-    __metadata("design:paramtypes", [forms_1.FormBuilder, router_1.ActivatedRoute])
+    __metadata("design:paramtypes", [forms_1.FormBuilder, router_1.ActivatedRoute, product_service_1.ProductService])
 ], ProductEditComponent);
 exports.ProductEditComponent = ProductEditComponent;
 //# sourceMappingURL=product-edit.component.js.map

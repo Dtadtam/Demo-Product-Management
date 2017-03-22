@@ -8,6 +8,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var http_1 = require("@angular/http");
 var Observable_1 = require("rxjs/Observable");
@@ -15,24 +16,57 @@ require("rxjs/add/operator/catch");
 require("rxjs/add/operator/do");
 require("rxjs/add/operator/map");
 var ProductService = (function () {
-    function ProductService(_http) {
-        this._http = _http;
-        this._productUrl = 'api/products/products.json';
+    function ProductService(http) {
+        this.http = http;
+        //private productUrl = 'api/products/products.json';
+        this.baseUrl = 'api/products';
     }
     ProductService.prototype.getProducts = function () {
-        return this._http.get(this._productUrl)
+        return this.http.get("" + this.baseUrl)
             .map(function (response) { return response.json(); })
+            .do(function (data) { return console.log('All: ' + JSON.stringify(data)); })
             .catch(this.handleError);
     };
     ProductService.prototype.getProductById = function (id) {
-        var result = this._http.get(this._productUrl)
-            .map(function (response) { return response.json().find(function (p) { return p.productId == id; }); })
+        var _this = this;
+        if (id === 0) {
+            return Observable_1.Observable.create(function (observer) {
+                observer.next(_this.initializaProduct());
+                observer.complete();
+            });
+        }
+        var url = this.baseUrl + "/" + id;
+        return this.http.get(url)
+            .map(this.extractData)
+            .do(function (data) { return console.log('getProduct: ' + JSON.stringify(data)); })
             .catch(this.handleError);
-        return result;
+    };
+    ProductService.prototype.deleteProduct = function (id) {
+        return null;
+    };
+    ProductService.prototype.saveProduct = function (product) {
+        return null;
+    };
+    ProductService.prototype.extractData = function (response) {
+        var body = response.json();
+        return body.data || {};
     };
     ProductService.prototype.handleError = function (error) {
         console.error(error);
         return Observable_1.Observable.throw(error.json().error || 'Server error');
+    };
+    ProductService.prototype.initializaProduct = function () {
+        return {
+            productId: 0,
+            productName: null,
+            productCode: null,
+            tags: [''],
+            price: null,
+            releaseDate: null,
+            description: null,
+            starRating: null,
+            imageUrl: null
+        };
     };
     return ProductService;
 }());

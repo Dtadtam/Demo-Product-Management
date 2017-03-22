@@ -60,7 +60,7 @@ export class ProductListComponent implements OnInit {
 
     ngOnInit():void {
         this._productService.getProducts()
-            .subscribe(products => this.products = products,
+            .subscribe(products => this.products = <IProduct[]>products,
                 error => this.errorMessage = <any>error); 
     }
 

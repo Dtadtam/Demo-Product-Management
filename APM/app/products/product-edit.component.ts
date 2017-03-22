@@ -35,7 +35,7 @@ export class ProductEditComponent implements OnInit, AfterViewInit, OnDestroy {
     private validationMessage: { [key: string]: { [key: string]: string } };
     private genericValidator: GenericValidator;
 
-    constructor(private fb: FormBuilder, private route: ActivatedRoute) {
+    constructor(private fb: FormBuilder, private route: ActivatedRoute, private ProductService: ProductService) {
 
     }
 
@@ -58,7 +58,7 @@ export class ProductEditComponent implements OnInit, AfterViewInit, OnDestroy {
         this.sub = this.route.params.subscribe(
             params => {
                 let id = +params['id'];
-                this.getProductId(id)
+                this.getProduct(id)
             }
         );
 
@@ -80,9 +80,13 @@ export class ProductEditComponent implements OnInit, AfterViewInit, OnDestroy {
 
     }
 
-    getProductId(id: number): IProduct {
-        return null;
-    }
+    getProduct(id: number): void {
+        this.ProductService.getProductById(id)
+            .subscribe(
+                (product: IProduct) => this.onProductRetrieved(product),
+                (error: any) => this.errorMessage = <any>error
+            );
+}
 
     addTag(): void {
         this.tags.push(this.buildTag());
@@ -121,5 +125,28 @@ export class ProductEditComponent implements OnInit, AfterViewInit, OnDestroy {
                 this.ValidationMessages[key]).join(' ');
         }
         else return '';
+    }
+
+    onProductRetrieved(product: IProduct): void {
+        if(this.productForm){
+            this.productForm.reset();
+        }
+        this.product = product;
+
+        if(this.product.productId === 0){
+            this.pageTitle = 'Add Product';
+        }
+        else {
+            this.pageTitle = `Edit Product: ${this.product.productName}`;
+        }
+
+        // Update the data on the form
+        this.productForm.patchValue({
+            productName: this.product.productName,
+            productCode: this.product.productCode,
+            starRating: this.product.starRating,
+            description: this.product.description
+        });
+        this.productForm.setControl('tags', this.fb.array(this.product.tags || []));
     }
 }

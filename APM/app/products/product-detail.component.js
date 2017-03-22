@@ -8,6 +8,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var router_1 = require("@angular/router");
 var product_service_1 = require("./product.service");
@@ -26,7 +27,9 @@ var ProductDetailComponent = (function () {
                 _this.product = value;
                 _this.pageTitle = 'Product Detail : ' + _this.product.productName;
                 // this.product.productName = 'test';
-            }, function (error) { return _this.errorMessage = error; });
+            }, function (error) { return _this.errorMessage = error; }
+            // () => {this.errorMessage = "<any>error"}
+            );
         });
     };
     ProductDetailComponent.prototype.ngOnDestroy = function () {
