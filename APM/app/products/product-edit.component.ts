@@ -50,7 +50,7 @@ export class ProductEditComponent implements OnInit, AfterViewInit, OnDestroy {
                                Validators.maxLength(50)]],
             productCode: ['', Validators.required],
             starRating: ['', NumberValidators.range(1, 5)],
-            tags: this.fb.array([this.buildTag()]),
+            tags: this.fb.array([this.buildTag('')]),
             description: ''
         });
 
@@ -89,11 +89,11 @@ export class ProductEditComponent implements OnInit, AfterViewInit, OnDestroy {
 }
 
     addTag(): void {
-        this.tags.push(this.buildTag());
+        this.tags.push(this.buildTag(''));
     }
 
-    buildTag(): FormGroup {
-        return this.fb.group({ tag: ['', Validators.required] });
+    buildTag(value: string): FormGroup {
+        return this.fb.group({ tag: [value, Validators.required] });
     }
 
     private ValidationMessages = {
@@ -128,12 +128,12 @@ export class ProductEditComponent implements OnInit, AfterViewInit, OnDestroy {
     }
 
     onProductRetrieved(product: IProduct): void {
-        if(this.productForm){
+        if(this.productForm) {
             this.productForm.reset();
         }
         this.product = product;
 
-        if(this.product.productId === 0){
+        if(this.product.id === 0) {
             this.pageTitle = 'Add Product';
         }
         else {
@@ -147,6 +147,11 @@ export class ProductEditComponent implements OnInit, AfterViewInit, OnDestroy {
             starRating: this.product.starRating,
             description: this.product.description
         });
-        this.productForm.setControl('tags', this.fb.array(this.product.tags || []));
+        this.productForm.setControl('tags', this.fb.array([]));
+        for (let value of this.product.tags) {
+            if (value) {
+                this.tags.push(this.buildTag(value));
+            }
+        }
     }
 }

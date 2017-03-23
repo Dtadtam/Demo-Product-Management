@@ -29,8 +29,8 @@ ProductModule = __decorate([
         imports: [
             shared_module_1.SharedModule,
             forms_1.ReactiveFormsModule,
-            angular_in_memory_web_api_1.InMemoryWebApiModule.forRoot(product_data_1.ProductData),
-            product_routing_module_1.ProductRoutingModule
+            product_routing_module_1.ProductRoutingModule,
+            angular_in_memory_web_api_1.InMemoryWebApiModule.forRoot(product_data_1.ProductData)
         ],
         declarations: [
             product_list_component_1.ProductListComponent,

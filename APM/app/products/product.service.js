@@ -23,8 +23,7 @@ var ProductService = (function () {
     }
     ProductService.prototype.getProducts = function () {
         return this.http.get("" + this.baseUrl)
-            .map(function (response) { return response.json(); })
-            .do(function (data) { return console.log('All: ' + JSON.stringify(data)); })
+            .map(this.extractData)
             .catch(this.handleError);
     };
     ProductService.prototype.getProductById = function (id) {
@@ -57,7 +56,7 @@ var ProductService = (function () {
     };
     ProductService.prototype.initializaProduct = function () {
         return {
-            productId: 0,
+            id: 0,
             productName: null,
             productCode: null,
             tags: [''],

@@ -20,8 +20,8 @@ import { SharedModule } from '../shared/shared.module';
     imports: [
         SharedModule,
         ReactiveFormsModule,
-        InMemoryWebApiModule.forRoot(ProductData),
-        ProductRoutingModule
+        ProductRoutingModule,
+        InMemoryWebApiModule.forRoot(ProductData)
     ],
     declarations: [
         ProductListComponent,

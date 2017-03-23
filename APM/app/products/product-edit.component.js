@@ -47,7 +47,7 @@ var ProductEditComponent = (function () {
                     forms_1.Validators.maxLength(50)]],
             productCode: ['', forms_1.Validators.required],
             starRating: ['', number_validator_1.NumberValidators.range(1, 5)],
-            tags: this.fb.array([this.buildTag()]),
+            tags: this.fb.array([this.buildTag('')]),
             description: ''
         });
         // read the product Id from the route parameter
@@ -73,10 +73,10 @@ var ProductEditComponent = (function () {
             .subscribe(function (product) { return _this.onProductRetrieved(product); }, function (error) { return _this.errorMessage = error; });
     };
     ProductEditComponent.prototype.addTag = function () {
-        this.tags.push(this.buildTag());
+        this.tags.push(this.buildTag(''));
     };
-    ProductEditComponent.prototype.buildTag = function () {
-        return this.fb.group({ tag: ['', forms_1.Validators.required] });
+    ProductEditComponent.prototype.buildTag = function (value) {
+        return this.fb.group({ tag: [value, forms_1.Validators.required] });
     };
     ProductEditComponent.prototype.setProductNameMessage = function (control) {
         this.productNameMessage = this.getMessage(control);
@@ -105,7 +105,7 @@ var ProductEditComponent = (function () {
             this.productForm.reset();
         }
         this.product = product;
-        if (this.product.productId === 0) {
+        if (this.product.id === 0) {
             this.pageTitle = 'Add Product';
         }
         else {
@@ -118,7 +118,13 @@ var ProductEditComponent = (function () {
             starRating: this.product.starRating,
             description: this.product.description
         });
-        this.productForm.setControl('tags', this.fb.array(this.product.tags || []));
+        this.productForm.setControl('tags', this.fb.array([]));
+        for (var _i = 0, _a = this.product.tags; _i < _a.length; _i++) {
+            var value = _a[_i];
+            if (value) {
+                this.tags.push(this.buildTag(value));
+            }
+        }
     };
     return ProductEditComponent;
 }());

@@ -6,7 +6,7 @@ var ProductData = (function () {
     ProductData.prototype.createDb = function () {
         var products = [
             {
-                "productId": 1,
+                "id": 1,
                 "productName": "Leaf Rake",
                 "productCode": "GDN-0011",
                 "releaseDate": "2016-03-19T00:00:00.000z",
@@ -17,7 +17,7 @@ var ProductData = (function () {
                 'tags': ['rake', 'leaf', 'yard', 'home']
             },
             {
-                "productId": 2,
+                "id": 2,
                 "productName": "Garden Cart",
                 "productCode": "GDN-0023",
                 "releaseDate": "2016-03-18T00:00:00.000z",
@@ -28,7 +28,7 @@ var ProductData = (function () {
                 'tags': ['rake', 'leaf', 'yard', 'home']
             },
             {
-                "productId": 5,
+                "id": 5,
                 "productName": "Hammer",
                 "productCode": "TBX-0048",
                 "releaseDate": "2016-05-21T00:00:00.000z",
@@ -39,7 +39,7 @@ var ProductData = (function () {
                 'tags': ['rake', 'leaf', 'yard', 'home']
             },
             {
-                "productId": 8,
+                "id": 8,
                 "productName": "Saw",
                 "productCode": "TBX-0022",
                 "releaseDate": "2016-05-15T00:00:00.000z",
@@ -50,7 +50,7 @@ var ProductData = (function () {
                 'tags': ['rake', 'leaf', 'yard', 'home']
             },
             {
-                "productId": 10,
+                "id": 10,
                 "productName": "Video Game Controller",
                 "productCode": "GMG-0042",
                 "releaseDate": "2015-10-15T00:00:00.000z",

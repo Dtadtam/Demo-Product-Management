@@ -19,8 +19,8 @@ export class ProductService {
 
     getProducts(): Observable<IProduct[]> {
         return this.http.get(`${this.baseUrl}`)
-            .map((response: Response) => <IProduct[]> response.json())
-            .do(data => console.log('All: ' + JSON.stringify(data)))
+            .map(this.extractData)
+            // .do(data => console.log('All: ' + JSON.stringify(data)))
             .catch(this.handleError);
     }
 
@@ -58,7 +58,7 @@ export class ProductService {
 
     initializaProduct(): IProduct {
         return {
-            productId: 0,
+            id: 0,
             productName: null,
             productCode: null,
             tags: [''],
