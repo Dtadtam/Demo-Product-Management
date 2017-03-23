@@ -35,7 +35,7 @@ export class ProductEditComponent implements OnInit, AfterViewInit, OnDestroy {
     private validationMessage: { [key: string]: { [key: string]: string } };
     private genericValidator: GenericValidator;
 
-    constructor(private fb: FormBuilder, private route: ActivatedRoute, private ProductService: ProductService) {
+    constructor(private fb: FormBuilder, private route: ActivatedRoute, private router: Router, private ProductService: ProductService) {
 
     }
 
@@ -115,10 +115,6 @@ export class ProductEditComponent implements OnInit, AfterViewInit, OnDestroy {
         this.ratingMessage = this.getMessage(control);
     }
 
-    setTagMessage(control: AbstractControl, errorControl: AbstractControl) {
-        errorControl.value = this.getMessage(control);
-    }
-
     getMessage(control: AbstractControl): string {
         if((control.dirty || control.touched) && control.errors) {
             return Object.keys(control.errors).map(key => 
@@ -153,5 +149,47 @@ export class ProductEditComponent implements OnInit, AfterViewInit, OnDestroy {
                 this.tags.push(this.buildTag(value));
             }
         }
+    }
+
+    deleteProduct(): void {
+        if(this.product.id === 0){
+            // Don't delete, it was never saved.
+            this.onSaveComplete();
+        }
+        else {
+            if (confirm(`Really delete the product: ${this.product.productName}`)) {
+                this.ProductService.deleteProduct(this.product.id)
+                    .subscribe(
+                        () => this.onSaveComplete(),
+                        (error: any) => this.errorMessage = error
+                    );
+            }
+        }
+    }
+
+    saveProduct(): void {
+        if (this.productForm.dirty && this.productForm.valid) {
+            // Copy the form values over the product object values
+            let p = Object.assign({}, this.product, this.productForm.value);
+            p.tags = new Array();
+            for (let obj of this.tags.value) {
+                p.tags.push(obj.tag);
+            }
+
+            this.ProductService.saveProduct(p)
+                .subscribe(
+                    () => this.onSaveComplete(),
+                    (error: any) => this.errorMessage = <any>error
+                );
+        }
+        else if (!this.productForm.dirty) {
+            this.onSaveComplete();
+        }
+    }
+
+    onSaveComplete(): void {
+        // Reset the form to clear the flags
+        this.productForm.reset();
+        this.router.navigate(['/products']);
     }
 }

@@ -18,9 +18,10 @@ require("rxjs/add/observable/merge");
 var product_service_1 = require("./product.service");
 var number_validator_1 = require("../shared/number.validator");
 var ProductEditComponent = (function () {
-    function ProductEditComponent(fb, route, ProductService) {
+    function ProductEditComponent(fb, route, router, ProductService) {
         this.fb = fb;
         this.route = route;
+        this.router = router;
         this.ProductService = ProductService;
         this.pageTitle = 'Product Edit';
         // Use with the generic validation message class
@@ -87,9 +88,6 @@ var ProductEditComponent = (function () {
     ProductEditComponent.prototype.setStarRatingMessage = function (control) {
         this.ratingMessage = this.getMessage(control);
     };
-    ProductEditComponent.prototype.setTagMessage = function (control, errorControl) {
-        errorControl.value = this.getMessage(control);
-    };
     ProductEditComponent.prototype.getMessage = function (control) {
         var _this = this;
         if ((control.dirty || control.touched) && control.errors) {
@@ -126,6 +124,41 @@ var ProductEditComponent = (function () {
             }
         }
     };
+    ProductEditComponent.prototype.deleteProduct = function () {
+        var _this = this;
+        if (this.product.id === 0) {
+            // Don't delete, it was never saved.
+            this.onSaveComplete();
+        }
+        else {
+            if (confirm("Really delete the product: " + this.product.productName)) {
+                this.ProductService.deleteProduct(this.product.id)
+                    .subscribe(function () { return _this.onSaveComplete(); }, function (error) { return _this.errorMessage = error; });
+            }
+        }
+    };
+    ProductEditComponent.prototype.saveProduct = function () {
+        var _this = this;
+        if (this.productForm.dirty && this.productForm.valid) {
+            // Copy the form values over the product object values
+            var p = Object.assign({}, this.product, this.productForm.value);
+            p.tags = new Array();
+            for (var _i = 0, _a = this.tags.value; _i < _a.length; _i++) {
+                var obj = _a[_i];
+                p.tags.push(obj.tag);
+            }
+            this.ProductService.saveProduct(p)
+                .subscribe(function () { return _this.onSaveComplete(); }, function (error) { return _this.errorMessage = error; });
+        }
+        else if (!this.productForm.dirty) {
+            this.onSaveComplete();
+        }
+    };
+    ProductEditComponent.prototype.onSaveComplete = function () {
+        // Reset the form to clear the flags
+        this.productForm.reset();
+        this.router.navigate(['/products']);
+    };
     return ProductEditComponent;
 }());
 __decorate([
@@ -136,7 +169,7 @@ ProductEditComponent = __decorate([
     core_1.Component({
         templateUrl: './app/products/product-edit.component.html'
     }),
-    __metadata("design:paramtypes", [forms_1.FormBuilder, router_1.ActivatedRoute, product_service_1.ProductService])
+    __metadata("design:paramtypes", [forms_1.FormBuilder, router_1.ActivatedRoute, router_1.Router, product_service_1.ProductService])
 ], ProductEditComponent);
 exports.ProductEditComponent = ProductEditComponent;
 //# sourceMappingURL=product-edit.component.js.map

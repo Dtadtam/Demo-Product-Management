@@ -39,11 +39,40 @@ export class ProductService {
     }
 
     deleteProduct(id: number): Observable<Response> {
-        return null;
+        let headers = new Headers({ 'Content-Type': 'application/json' });
+        let options = new RequestOptions({ headers: headers });
+
+        const url = `${this.baseUrl}/${id}`;
+        return this.http.delete(url, options)
+            .do(data => console.log(JSON.stringify(data)))
+            .catch(this.handleError);
     }
 
     saveProduct(product: IProduct): Observable<IProduct> {
-        return null;
+        let headers = new Headers({ 'Content-Type': 'application/json' });
+        let options = new RequestOptions({ headers: headers }); 
+
+        if(product.id === 0) {
+            return this.createProduct(product, options);
+        }
+
+        return this.updateProduct(product, options);
+    }
+
+    private createProduct(product: IProduct, options: RequestOptions): Observable<IProduct> {
+        product.id = undefined;
+        return this.http.post(this.baseUrl, product, options)
+            .map(this.extractData)
+            .do(data => console.log('createProduct: ' + JSON.stringify(data)))
+            .catch(this.handleError);
+    }
+
+    private updateProduct(product: IProduct, options: RequestOptions): Observable<IProduct> {
+        const url = `${this.baseUrl}/${product.id}`;
+        return this.http.put(url, product, options)
+            .map(() => product)
+            .do(data => console.log('updateProduct: ' + JSON.stringify(data)))
+            .catch(this.handleError);
     }
 
     private extractData(response: Response) {

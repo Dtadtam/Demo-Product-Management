@@ -41,10 +41,34 @@ var ProductService = (function () {
             .catch(this.handleError);
     };
     ProductService.prototype.deleteProduct = function (id) {
-        return null;
+        var headers = new http_1.Headers({ 'Content-Type': 'application/json' });
+        var options = new http_1.RequestOptions({ headers: headers });
+        var url = this.baseUrl + "/" + id;
+        return this.http.delete(url, options)
+            .do(function (data) { return console.log(JSON.stringify(data)); })
+            .catch(this.handleError);
     };
     ProductService.prototype.saveProduct = function (product) {
-        return null;
+        var headers = new http_1.Headers({ 'Content-Type': 'application/json' });
+        var options = new http_1.RequestOptions({ headers: headers });
+        if (product.id === 0) {
+            return this.createProduct(product, options);
+        }
+        return this.updateProduct(product, options);
+    };
+    ProductService.prototype.createProduct = function (product, options) {
+        product.id = undefined;
+        return this.http.post(this.baseUrl, product, options)
+            .map(this.extractData)
+            .do(function (data) { return console.log('createProduct: ' + JSON.stringify(data)); })
+            .catch(this.handleError);
+    };
+    ProductService.prototype.updateProduct = function (product, options) {
+        var url = this.baseUrl + "/" + product.id;
+        return this.http.put(url, product, options)
+            .map(function () { return product; })
+            .do(function (data) { return console.log('updateProduct: ' + JSON.stringify(data)); })
+            .catch(this.handleError);
     };
     ProductService.prototype.extractData = function (response) {
         var body = response.json();

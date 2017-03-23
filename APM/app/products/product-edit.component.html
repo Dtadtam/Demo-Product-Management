@@ -5,7 +5,7 @@
     <div class="panel-body">
         <form class="form-horizontal"
             novalidate
-            (ngSubmit)="save()"
+            (ngSubmit)="saveProduct()"
             [formGroup]="productForm">
             <div class="form-group"
                 [ngClass]="{'has-error': productNameMessage}">
@@ -119,12 +119,12 @@
                         Save
                     </button>
                     <button class="btn btn-normal"
-                            (click)="cancelClick()"
+                            [routerLink]="['/products']"
                             type="button">
                         Cancel
                     </button>
                     <button class="btn btn-normal"
-                            (click)="deleteClick()"
+                            (click)="deleteProduct()"
                             type="button">
                         Delete        
                     </button>
