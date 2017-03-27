@@ -1,0 +1,9 @@
+E:\Education\GitHub\APM\web-api\web-api\bin\Debug\netcoreapp1.1\web_api.deps.json
+E:\Education\GitHub\APM\web-api\web-api\bin\Debug\netcoreapp1.1\web_api.runtimeconfig.json
+E:\Education\GitHub\APM\web-api\web-api\bin\Debug\netcoreapp1.1\web_api.runtimeconfig.dev.json
+E:\Education\GitHub\APM\web-api\web-api\bin\Debug\netcoreapp1.1\web_api.dll
+E:\Education\GitHub\APM\web-api\web-api\bin\Debug\netcoreapp1.1\web_api.pdb
+E:\Education\GitHub\APM\web-api\web-api\obj\Debug\netcoreapp1.1\web_api.csprojResolveAssemblyReference.cache
+E:\Education\GitHub\APM\web-api\web-api\obj\Debug\netcoreapp1.1\web_api.AssemblyInfo.cs
+E:\Education\GitHub\APM\web-api\web-api\obj\Debug\netcoreapp1.1\web_api.dll
+E:\Education\GitHub\APM\web-api\web-api\obj\Debug\netcoreapp1.1\web_api.pdb

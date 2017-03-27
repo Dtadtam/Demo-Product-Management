@@ -18,14 +18,17 @@ require("rxjs/add/operator/map");
 var ProductService = (function () {
     function ProductService(http) {
         this.http = http;
-        //private productUrl = 'api/products/products.json';
-        this.baseUrl = 'api/products';
+        // Web API Port
+        this.baseUrl = 'http://localhost:52768/api/products';
     }
+    // Get all product(s)
     ProductService.prototype.getProducts = function () {
         return this.http.get("" + this.baseUrl)
             .map(this.extractData)
+            .do(function (data) { return console.log('All: ' + JSON.stringify(data)); })
             .catch(this.handleError);
     };
+    // Get product by id
     ProductService.prototype.getProductById = function (id) {
         var _this = this;
         if (id === 0) {
@@ -40,6 +43,7 @@ var ProductService = (function () {
             .do(function (data) { return console.log('getProduct: ' + JSON.stringify(data)); })
             .catch(this.handleError);
     };
+    // Delete product 
     ProductService.prototype.deleteProduct = function (id) {
         var headers = new http_1.Headers({ 'Content-Type': 'application/json' });
         var options = new http_1.RequestOptions({ headers: headers });
@@ -48,6 +52,7 @@ var ProductService = (function () {
             .do(function (data) { return console.log(JSON.stringify(data)); })
             .catch(this.handleError);
     };
+    // Gate way to create or update product
     ProductService.prototype.saveProduct = function (product) {
         var headers = new http_1.Headers({ 'Content-Type': 'application/json' });
         var options = new http_1.RequestOptions({ headers: headers });
@@ -56,6 +61,7 @@ var ProductService = (function () {
         }
         return this.updateProduct(product, options);
     };
+    // Create product
     ProductService.prototype.createProduct = function (product, options) {
         product.id = undefined;
         return this.http.post(this.baseUrl, product, options)
@@ -63,6 +69,7 @@ var ProductService = (function () {
             .do(function (data) { return console.log('createProduct: ' + JSON.stringify(data)); })
             .catch(this.handleError);
     };
+    // Update product
     ProductService.prototype.updateProduct = function (product, options) {
         var url = this.baseUrl + "/" + product.id;
         return this.http.put(url, product, options)
@@ -70,14 +77,17 @@ var ProductService = (function () {
             .do(function (data) { return console.log('updateProduct: ' + JSON.stringify(data)); })
             .catch(this.handleError);
     };
+    // Function to extract data when web-api response something
     ProductService.prototype.extractData = function (response) {
         var body = response.json();
         return body.data || {};
     };
+    // Return error when request or response has a crash
     ProductService.prototype.handleError = function (error) {
         console.error(error);
         return Observable_1.Observable.throw(error.json().error || 'Server error');
     };
+    // To initializa product when staying in create mode
     ProductService.prototype.initializaProduct = function () {
         return {
             id: 0,

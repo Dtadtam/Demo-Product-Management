@@ -10,20 +10,22 @@ import { IProduct } from './product';
 
 @Injectable()
 export class ProductService {
-    //private productUrl = 'api/products/products.json';
-    private baseUrl = 'api/products';
+    // Web API Port
+    private baseUrl = 'http://localhost:52768/api/products';
 
     constructor(private http: Http) {
 
     }
 
+    // Get all product(s)
     getProducts(): Observable<IProduct[]> {
         return this.http.get(`${this.baseUrl}`)
             .map(this.extractData)
-            // .do(data => console.log('All: ' + JSON.stringify(data)))
+            .do(data => console.log('All: ' + JSON.stringify(data)))
             .catch(this.handleError);
     }
 
+    // Get product by id
     getProductById(id: number): Observable<IProduct> {
         if(id === 0){
             return Observable.create((observer: any) => {
@@ -38,6 +40,7 @@ export class ProductService {
             .catch(this.handleError);
     }
 
+    // Delete product 
     deleteProduct(id: number): Observable<Response> {
         let headers = new Headers({ 'Content-Type': 'application/json' });
         let options = new RequestOptions({ headers: headers });
@@ -48,6 +51,7 @@ export class ProductService {
             .catch(this.handleError);
     }
 
+    // Gate way to create or update product
     saveProduct(product: IProduct): Observable<IProduct> {
         let headers = new Headers({ 'Content-Type': 'application/json' });
         let options = new RequestOptions({ headers: headers }); 
@@ -59,6 +63,7 @@ export class ProductService {
         return this.updateProduct(product, options);
     }
 
+    // Create product
     private createProduct(product: IProduct, options: RequestOptions): Observable<IProduct> {
         product.id = undefined;
         return this.http.post(this.baseUrl, product, options)
@@ -67,6 +72,7 @@ export class ProductService {
             .catch(this.handleError);
     }
 
+    // Update product
     private updateProduct(product: IProduct, options: RequestOptions): Observable<IProduct> {
         const url = `${this.baseUrl}/${product.id}`;
         return this.http.put(url, product, options)
@@ -75,16 +81,19 @@ export class ProductService {
             .catch(this.handleError);
     }
 
+    // Function to extract data when web-api response something
     private extractData(response: Response) {
         let body = response.json();
         return body.data || {};
     }
 
+    // Return error when request or response has a crash
     private handleError(error: Response){
         console.error(error);
         return  Observable.throw(error.json().error || 'Server error');
     }
 
+    // To initializa product when staying in create mode
     initializaProduct(): IProduct {
         return {
             id: 0,

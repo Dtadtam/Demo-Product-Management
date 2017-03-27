@@ -6,9 +6,6 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-// Imports for loading & configuring the in-memory web api
-var angular_in_memory_web_api_1 = require("angular-in-memory-web-api");
-var product_data_1 = require("./product-data");
 var core_1 = require("@angular/core");
 var forms_1 = require("@angular/forms");
 var product_list_component_1 = require("./product-list.component");
@@ -29,8 +26,7 @@ ProductModule = __decorate([
         imports: [
             shared_module_1.SharedModule,
             forms_1.ReactiveFormsModule,
-            product_routing_module_1.ProductRoutingModule,
-            angular_in_memory_web_api_1.InMemoryWebApiModule.forRoot(product_data_1.ProductData)
+            product_routing_module_1.ProductRoutingModule
         ],
         declarations: [
             product_list_component_1.ProductListComponent,

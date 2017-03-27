@@ -1,5 +1,4 @@
 // Imports for loading & configuring the in-memory web api
-import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { ProductData } from './product-data';
 
 import { NgModule } from '@angular/core';
@@ -20,8 +19,7 @@ import { SharedModule } from '../shared/shared.module';
     imports: [
         SharedModule,
         ReactiveFormsModule,
-        ProductRoutingModule,
-        InMemoryWebApiModule.forRoot(ProductData)
+        ProductRoutingModule
     ],
     declarations: [
         ProductListComponent,
