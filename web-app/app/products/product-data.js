@@ -14,7 +14,7 @@ var ProductData = (function () {
                 "price": 19.95,
                 "starRating": 3.2,
                 "imageUrl": "http://openclipart.org/image/300px/svg_to_png/26215/Anonymous_Leaf_Rake.png",
-                'tags': ['rake', 'leaf', 'yard', 'home']
+                'tags': 'rake,leaf,yard,home'
             },
             {
                 "id": 2,
@@ -25,7 +25,7 @@ var ProductData = (function () {
                 "price": 32.99,
                 "starRating": 4.2,
                 "imageUrl": "http://openclipart.org/image/300px/svg_to_png/58471/garden_cart.png",
-                'tags': ['rake', 'leaf', 'yard', 'home']
+                'tags': 'rake,leaf,yard,home'
             },
             {
                 "id": 5,
@@ -36,7 +36,7 @@ var ProductData = (function () {
                 "price": 8.9,
                 "starRating": 4.8,
                 "imageUrl": "http://openclipart.org/image/300px/svg_to_png/73/rejon_Hammer.png",
-                'tags': ['rake', 'leaf', 'yard', 'home']
+                'tags': 'rake,leaf,yard,home'
             },
             {
                 "id": 8,
@@ -47,7 +47,7 @@ var ProductData = (function () {
                 "price": 11.55,
                 "starRating": 3.7,
                 "imageUrl": "http://openclipart.org/image/300px/svg_to_png/27070/egore911_saw.png",
-                'tags': ['rake', 'leaf', 'yard', 'home']
+                'tags': 'rake,leaf,yard,home'
             },
             {
                 "id": 10,
@@ -58,7 +58,7 @@ var ProductData = (function () {
                 "price": 35.95,
                 "starRating": 4.6,
                 "imageUrl": "http://openclipart.org/image/300px/svg_to_png/120337/xbox-controller_01.png",
-                'tags': ['rake', 'leaf', 'yard', 'home']
+                'tags': 'rake,leaf,yard,home'
             }
         ];
         return { products: products };

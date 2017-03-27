@@ -66,8 +66,6 @@ var ProductEditComponent = (function () {
     ProductEditComponent.prototype.ngOnDestroy = function () {
         this.sub.unsubscribe();
     };
-    ProductEditComponent.prototype.ngAfterViewInit = function () {
-    };
     ProductEditComponent.prototype.getProduct = function (id) {
         var _this = this;
         this.ProductService.getProductById(id)
@@ -117,7 +115,7 @@ var ProductEditComponent = (function () {
             description: this.product.description
         });
         this.productForm.setControl('tags', this.fb.array([]));
-        for (var _i = 0, _a = this.product.tags; _i < _a.length; _i++) {
+        for (var _i = 0, _a = this.product.tags.split(','); _i < _a.length; _i++) {
             var value = _a[_i];
             if (value) {
                 this.tags.push(this.buildTag(value));
@@ -142,11 +140,13 @@ var ProductEditComponent = (function () {
         if (this.productForm.dirty && this.productForm.valid) {
             // Copy the form values over the product object values
             var p = Object.assign({}, this.product, this.productForm.value);
-            p.tags = new Array();
+            var tags = new Array();
             for (var _i = 0, _a = this.tags.value; _i < _a.length; _i++) {
                 var obj = _a[_i];
-                p.tags.push(obj.tag);
+                tags.push(obj.tag);
             }
+            p.tags = tags.join(',');
+            console.log(p);
             this.ProductService.saveProduct(p)
                 .subscribe(function () { return _this.onSaveComplete(); }, function (error) { return _this.errorMessage = error; });
         }
@@ -161,10 +161,6 @@ var ProductEditComponent = (function () {
     };
     return ProductEditComponent;
 }());
-__decorate([
-    core_1.ViewChildren(forms_1.FormControlName, { read: core_1.ElementRef }),
-    __metadata("design:type", Array)
-], ProductEditComponent.prototype, "formInputElements", void 0);
 ProductEditComponent = __decorate([
     core_1.Component({
         templateUrl: './app/products/product-edit.component.html'

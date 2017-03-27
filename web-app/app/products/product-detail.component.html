@@ -14,7 +14,7 @@
         </div>
         <div class="clear"></div>
         <div class="col-md-12 col-xs-12 text-center">
-            <img [src]='product.imageUrl' [title]='product.productName' />
+            <img [src]='product.imageUrl' [title]='product.productName' *ngIf='product.imageUrl' />
         </div>
     </div>
     <div class="panel-footer">

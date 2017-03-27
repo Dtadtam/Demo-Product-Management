@@ -7,3 +7,12 @@ E:\Education\GitHub\APM\web-api\web-api\obj\Debug\netcoreapp1.1\web_api.csprojRe
 E:\Education\GitHub\APM\web-api\web-api\obj\Debug\netcoreapp1.1\web_api.AssemblyInfo.cs
 E:\Education\GitHub\APM\web-api\web-api\obj\Debug\netcoreapp1.1\web_api.dll
 E:\Education\GitHub\APM\web-api\web-api\obj\Debug\netcoreapp1.1\web_api.pdb
+C:\Users\admin\Documents\hello-world\web-api\web-api\bin\Debug\netcoreapp1.1\web_api.deps.json
+C:\Users\admin\Documents\hello-world\web-api\web-api\bin\Debug\netcoreapp1.1\web_api.runtimeconfig.json
+C:\Users\admin\Documents\hello-world\web-api\web-api\bin\Debug\netcoreapp1.1\web_api.runtimeconfig.dev.json
+C:\Users\admin\Documents\hello-world\web-api\web-api\bin\Debug\netcoreapp1.1\web_api.dll
+C:\Users\admin\Documents\hello-world\web-api\web-api\bin\Debug\netcoreapp1.1\web_api.pdb
+C:\Users\admin\Documents\hello-world\web-api\web-api\obj\Debug\netcoreapp1.1\web_api.AssemblyInfo.cs
+C:\Users\admin\Documents\hello-world\web-api\web-api\obj\Debug\netcoreapp1.1\web_api.dll
+C:\Users\admin\Documents\hello-world\web-api\web-api\obj\Debug\netcoreapp1.1\web_api.pdb
+C:\Users\admin\Documents\hello-world\web-api\web-api\obj\Debug\netcoreapp1.1\web_api.csprojResolveAssemblyReference.cache

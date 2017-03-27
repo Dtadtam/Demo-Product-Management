@@ -65,7 +65,7 @@ export class ProductService {
 
     // Create product
     private createProduct(product: IProduct, options: RequestOptions): Observable<IProduct> {
-        product.id = undefined;
+        console.log(product);
         return this.http.post(this.baseUrl, product, options)
             .map(this.extractData)
             .do(data => console.log('createProduct: ' + JSON.stringify(data)))
@@ -84,7 +84,7 @@ export class ProductService {
     // Function to extract data when web-api response something
     private extractData(response: Response) {
         let body = response.json();
-        return body.data || {};
+        return body || {};
     }
 
     // Return error when request or response has a crash
@@ -97,14 +97,14 @@ export class ProductService {
     initializaProduct(): IProduct {
         return {
             id: 0,
-            productName: null,
-            productCode: null,
-            tags: [''],
-            price: null,
-            releaseDate: null,
-            description: null,
-            starRating: null,
-            imageUrl: null
+            productName: '',
+            productCode: '',
+            tags: '',
+            price: 0,
+            releaseDate: new Date().toLocaleDateString(),
+            description: '',
+            starRating: 0,
+            imageUrl: ''
         };
     }
 }

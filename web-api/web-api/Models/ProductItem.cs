@@ -13,7 +13,7 @@ namespace web_api.Models
         public string productName { get; set; }
         public string productCode { get; set; }
         public DateTime releaseDate { get; set; }
-        public string desciption { get; set; }
+        public string description { get; set; }
         public double price { get; set; }
         public decimal starRating { get; set; }
         public string imageUrl { get; set; }

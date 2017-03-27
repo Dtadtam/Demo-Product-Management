@@ -29,7 +29,14 @@ namespace web_api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddCors();
+            services.AddCors(options => 
+            {
+                options.AddPolicy("AllowSpecificOrigin",
+                    builder => builder.WithOrigins("http://localhost:3000")
+                        .AllowAnyHeader()
+                        .AllowAnyOrigin()
+                        .AllowAnyMethod());
+            });
             services.AddDbContext<ProductContext>(opt => opt.UseInMemoryDatabase());
 
             // Add framework services.
@@ -45,6 +52,7 @@ namespace web_api
             loggerFactory.AddDebug();
 
             app.UseMvc();
+            app.UseCors("AllowSpecificOrigin");
         }
     }
 }

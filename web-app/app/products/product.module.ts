@@ -1,6 +1,3 @@
-// Imports for loading & configuring the in-memory web api
-import { ProductData } from './product-data';
-
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 

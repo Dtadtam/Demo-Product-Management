@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Cors;
 
 namespace web_api.Controllers
 {
-    [EnableCorsAttribute("*")]
+    [EnableCors("AllowSpecificOrigin")]
     [Route("api/[controller]")]
     public class ProductsController : Controller
     {
@@ -93,7 +93,7 @@ namespace web_api.Controllers
             dbItem.productName = formItem.productName;
             dbItem.productCode = formItem.productCode;
             dbItem.releaseDate = formItem.releaseDate;
-            dbItem.desciption = formItem.desciption;
+            dbItem.description = formItem.description;
             dbItem.price = formItem.price;
             dbItem.starRating = formItem.starRating;
             dbItem.imageUrl = formItem.imageUrl;

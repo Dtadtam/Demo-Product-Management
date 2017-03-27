@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit, OnDestroy, ViewChildren, ElementRef } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormBuilder, FormArray, FormGroup, FormControl, FormControlName, Validators, AbstractControl, ValidatorFn } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 
@@ -12,14 +12,12 @@ import { IProduct } from './product';
 import { ProductService } from './product.service';
 
 import { NumberValidators } from '../shared/number.validator';
-import { GenericValidator } from '../shared/generic-validator';
 
 @Component({
     templateUrl: './app/products/product-edit.component.html'
 })
 
-export class ProductEditComponent implements OnInit, AfterViewInit, OnDestroy {
-    @ViewChildren(FormControlName, {read: ElementRef}) formInputElements: ElementRef[];
+export class ProductEditComponent implements OnInit, OnDestroy {
 
     pageTitle: string = 'Product Edit';
     errorMessage: string;
@@ -33,7 +31,6 @@ export class ProductEditComponent implements OnInit, AfterViewInit, OnDestroy {
     // Use with the generic validation message class
     displayMessage: {[key: string]: string} = {};
     private validationMessage: { [key: string]: { [key: string]: string } };
-    private genericValidator: GenericValidator;
 
     constructor(private fb: FormBuilder, private route: ActivatedRoute, private router: Router, private ProductService: ProductService) {
 
@@ -76,10 +73,6 @@ export class ProductEditComponent implements OnInit, AfterViewInit, OnDestroy {
         this.sub.unsubscribe();
     }
 
-    ngAfterViewInit(): void{
-
-    }
-
     getProduct(id: number): void {
         this.ProductService.getProductById(id)
             .subscribe(
@@ -91,10 +84,6 @@ export class ProductEditComponent implements OnInit, AfterViewInit, OnDestroy {
     addTag(): void {
         this.tags.push(this.buildTag(''));
     }
-
-    // addTag(): void {
-    //     this.tags.push(new FormControl());
-    // }
 
     buildTag(value: string): FormGroup {
         return this.fb.group({ tag: [value, Validators.required] });
@@ -148,9 +137,8 @@ export class ProductEditComponent implements OnInit, AfterViewInit, OnDestroy {
             description: this.product.description
         });
         this.productForm.setControl('tags', this.fb.array([]));
-        // this.productForm.setControl('tags', this.fb.array(this.product.tags || []));
         
-        for (let value of this.product.tags) {
+        for (let value of this.product.tags.split(',')) {
             if (value) {
                 this.tags.push(this.buildTag(value));
             }
@@ -177,11 +165,12 @@ export class ProductEditComponent implements OnInit, AfterViewInit, OnDestroy {
         if (this.productForm.dirty && this.productForm.valid) {
             // Copy the form values over the product object values
             let p = Object.assign({}, this.product, this.productForm.value);
-            p.tags = new Array();
+            let tags = new Array();
             for (let obj of this.tags.value) {
-                p.tags.push(obj.tag);
+                tags.push(obj.tag);
             }
-
+            p.tags =  tags.join(',');
+            console.log(p);
             this.ProductService.saveProduct(p)
                 .subscribe(
                     () => this.onSaveComplete(),

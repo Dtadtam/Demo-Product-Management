@@ -9829,15 +9829,15 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\PC\\.nuget\\packages\\": {}
+    "C:\\Users\\admin\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\Education\\GitHub\\APM\\web-api\\web-api\\web_api.csproj",
+      "projectUniqueName": "C:\\Users\\admin\\Documents\\hello-world\\web-api\\web-api\\web_api.csproj",
       "projectName": "web_api",
-      "projectPath": "E:\\Education\\GitHub\\APM\\web-api\\web-api\\web_api.csproj",
-      "outputPath": "E:\\Education\\GitHub\\APM\\web-api\\web-api\\obj\\",
+      "projectPath": "C:\\Users\\admin\\Documents\\hello-world\\web-api\\web-api\\web_api.csproj",
+      "outputPath": "C:\\Users\\admin\\Documents\\hello-world\\web-api\\web-api\\obj\\",
       "projectStyle": "PackageReference",
       "originalTargetFrameworks": [
         "netcoreapp1.1"
