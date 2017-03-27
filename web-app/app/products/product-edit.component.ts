@@ -86,11 +86,15 @@ export class ProductEditComponent implements OnInit, AfterViewInit, OnDestroy {
                 (product: IProduct) => this.onProductRetrieved(product),
                 (error: any) => this.errorMessage = <any>error
             );
-}
+    }
 
     addTag(): void {
         this.tags.push(this.buildTag(''));
     }
+
+    // addTag(): void {
+    //     this.tags.push(new FormControl());
+    // }
 
     buildTag(value: string): FormGroup {
         return this.fb.group({ tag: [value, Validators.required] });
@@ -144,6 +148,8 @@ export class ProductEditComponent implements OnInit, AfterViewInit, OnDestroy {
             description: this.product.description
         });
         this.productForm.setControl('tags', this.fb.array([]));
+        // this.productForm.setControl('tags', this.fb.array(this.product.tags || []));
+        
         for (let value of this.product.tags) {
             if (value) {
                 this.tags.push(this.buildTag(value));
